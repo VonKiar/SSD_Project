@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    puts "This is how you print out something."
     @article = Article.new
   end
 
@@ -17,6 +18,11 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.create(article_params)
+
+    if @article.invalid?
+      flash[:error] = @article.errors.full_messages
+    end
+
     redirect_to action: :index
   end
 
