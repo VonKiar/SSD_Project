@@ -2,7 +2,12 @@ class ArticlesController < ApplicationController
   before_action :authenticate_admin!
 
   def index
+    @search = params[:search]
+
     @articles = Article.all
+    @articles = @articles
+      .where("title LIKE ? or body LIKE ?", "%#{@search}%", "%#{@search}%") if @search.present?
+    @articles = @articles.page(params[:page]).per(5)
   end
 
   def show

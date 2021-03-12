@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
+# For pagination
+gem 'kaminari'
+
 # For authentication
 gem 'devise'
 # For views rendering
@@ -37,6 +40,8 @@ group :production do
 end
 
 group :development, :test do
+  # For debugging
+  gem 'pry', '~> 0.13.1'
   # For testing
   gem 'rspec-rails', '~> 4.0.2'
   # Use sqlite3 as the database for Active Record
