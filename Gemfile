@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
+# For authentication
+gem 'devise'
+# For views rendering
 gem 'slim'
 # This is for generating random stuff
 gem 'faker'
@@ -34,6 +37,8 @@ group :production do
 end
 
 group :development, :test do
+  # For testing
+  gem 'rspec-rails', '~> 4.0.2'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.4'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
