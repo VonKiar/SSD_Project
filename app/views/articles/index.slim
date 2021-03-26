@@ -21,6 +21,7 @@
           th ID
           th Title
           th Body
+          th Categories
           th No. Comments
           th Created at
           th Updated at
@@ -31,6 +32,7 @@
             td = a.id
             td.font-weight-bold = a.title
             td = a.body
+            td = a.categories&.map(&:name)&.join(',').presence || 'NA'
             td = a.comments.count
             td.font-weight-light = "#{time_ago_in_words(a.created_at)} Ago"
             td.font-weight-light = "#{time_ago_in_words(a.updated_at)} Ago"

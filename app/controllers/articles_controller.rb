@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
     @articles = Article.all
     @articles = @articles
       .where("title LIKE ? or body LIKE ?", "%#{@search}%", "%#{@search}%") if @search.present?
-    @articles = @articles.page(params[:page]).per(5)
+    @articles = @articles.page(params[:page]).per(50)
   end
 
   def show
