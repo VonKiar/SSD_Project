@@ -8,17 +8,20 @@
       span.ml-3 = link_to 'Logout', destroy_admin_session_path
 
 .row
-  .col
+  .col-10
     = form_tag articles_path, method: :get do
       = text_field_tag 'search', @search, placeholder: 'Type something',
         class: 'form-control'
-
+  .col-2
+    = link_to articles_path(format: :csv) do
+      = button_tag 'Download CSV', class: 'btn btn-secondary float-right'
 .row.mt-2
   .col
     table.table.table-bordered.table-striped.table-hover
       thead.thead-dark
         tr
           th ID
+          th Status
           th Title
           th Body
           th Categories
@@ -30,7 +33,8 @@
         - @articles.each do |a|
           tr
             td = a.id
-            td.font-weight-bold = a.title
+            td = a.status
+            td.font-weight-bold = a.title.first(16)
             td = a.body
             td = a.categories&.map(&:name)&.join(',').presence || 'NA'
             td = a.comments.count
@@ -54,3 +58,12 @@
     .float-right
       = link_to new_article_path do
         = button_tag 'Add new Article', class: 'btn btn-primary'
+
+div
+  hr
+
+.row
+  .col
+    = form_tag articles_csv_upload_path, multipart: true do
+      div = file_field_tag :csv_file
+      div = submit_tag :upload

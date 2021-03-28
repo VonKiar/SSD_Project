@@ -1,4 +1,9 @@
 class Article < ApplicationRecord
+  enum status: { draft: 0, published: 1, archived: 2  }
+
+  scope :long_title, -> (length = 15) { where('LENGTH(title) > ?', length) }
+  scope :short_body, -> (length = 5) { where('LENGTH(body) < ?', length) }
+  scope :search, -> (arg) { where("title LIKE ? or body LIKE ?", "%#{arg}%", "%#{arg}%") }
 
   has_many :comments, dependent: :destroy
   has_many :article_categories
@@ -18,5 +23,15 @@ class Article < ApplicationRecord
   def clean_data
     self.title = title.upcase.squish
     self.body = body.humanize
+  end
+
+  def test_atomic_function
+    Article.transaction do
+      update title: "Atomic part A"
+      # Complicated code starts
+      raise "Something goes wrong"
+      # Complicated code ends
+      update title: "Atomic part B"
+    end
   end
 end
