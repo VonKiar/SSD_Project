@@ -5,6 +5,9 @@ class Article < ApplicationRecord
   scope :short_body, -> (length = 5) { where('LENGTH(body) < ?', length) }
   scope :search, -> (arg) { where("title LIKE ? or body LIKE ?", "%#{arg}%", "%#{arg}%") }
 
+  has_one_attached :cover_image
+  has_many_attached :images
+
   has_many :comments, dependent: :destroy
   has_many :article_categories
   has_many :categories, through: :article_categories

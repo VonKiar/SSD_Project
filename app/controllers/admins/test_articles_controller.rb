@@ -1,4 +1,4 @@
-class TestArticlesController < ApplicationController
+class Admins::TestArticlesController < ApplicationController
   #caches_page :index
 
   def index

@@ -6,6 +6,8 @@ ruby '2.7.2'
 # For page caching
 gem 'actionpack-page_caching'
 
+# For uploading file to AWS S3
+gem 'aws-sdk-s3'
 # For pagination
 gem 'kaminari'
 # For authentication

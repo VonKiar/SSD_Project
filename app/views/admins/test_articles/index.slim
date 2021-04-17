@@ -26,11 +26,11 @@
               td.font-weight-light = "#{time_ago_in_words(a.updated_at)} Ago"
               td
                 span
-                  = link_to article_path(a) do
+                  = link_to admins_article_path(a) do
                     i.fas.fa-eye
                 span.ml-3
-                  = link_to edit_article_path(a) do
+                  = link_to edit_admins_article_path(a) do
                     i.fas.fa-pen
                 span.ml-3
-                  = link_to article_path(a), method: :delete, data: { confirm: "Are you sure?" } do
+                  = link_to admins_article_path(a), method: :delete, data: { confirm: "Are you sure?" } do
                     i.fas.fa-trash
