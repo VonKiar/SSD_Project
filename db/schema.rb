@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_065615) do
+ActiveRecord::Schema.define(version: 2021_04_15_082159) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -55,39 +55,34 @@ ActiveRecord::Schema.define(version: 2021_04_09_065615) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "article_categories", force: :cascade do |t|
-    t.integer "article_id"
-    t.integer "category_id"
+  create_table "categories", force: :cascade do |t|
+    t.text "title"
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["article_id"], name: "index_article_categories_on_article_id"
-    t.index ["category_id"], name: "index_article_categories_on_category_id"
   end
 
-  create_table "articles", force: :cascade do |t|
-    t.string "title"
-    t.string "body"
+  create_table "fish", force: :cascade do |t|
+    t.text "title"
+    t.text "description"
+    t.integer "stock"
+    t.integer "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0, null: false
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
+  create_table "fish_categories", force: :cascade do |t|
+    t.integer "fish_id", null: false
+    t.integer "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "author"
-    t.string "text"
-    t.integer "article_id"
-    t.index ["article_id"], name: "index_comments_on_article_id"
+    t.index ["category_id"], name: "index_fish_categories_on_category_id"
+    t.index ["fish_id"], name: "index_fish_categories_on_fish_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "fish_categories", "categories"
+  add_foreign_key "fish_categories", "fish"
 end

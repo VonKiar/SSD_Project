@@ -4,15 +4,8 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validate :email_cannot_have_bob
-
   def say_hello
     'Hello'
   end
 
-  private
-
-  def email_cannot_have_bob
-    errors.add(:email, :cannot_have_bob) if email.include?('bob')
-  end
 end
