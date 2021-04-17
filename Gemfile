@@ -3,13 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
 
-# For page caching
-gem 'actionpack-page_caching'
-
-# For uploading file to AWS S3
-gem 'aws-sdk-s3'
 # For pagination
 gem 'kaminari'
+
 # For authentication
 gem 'devise'
 # For views rendering
@@ -32,7 +28,6 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
